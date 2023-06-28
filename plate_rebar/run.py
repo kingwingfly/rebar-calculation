@@ -1,6 +1,7 @@
 import json
 from pprint import pprint
 from plate import UpperRebar, BottomRebar, Beam
+import os
 
 
 class Uppers:
@@ -38,7 +39,11 @@ class Uppers:
 if __name__ == "__main__":
     filenames = ["structures-1F", "structures-2F"]
     for file in filenames:
-        with open(f"./structures/{file}.json", "r", encoding="utf-8") as f:
+        with open(
+            os.path.join(os.path.dirname(__file__), f"structures/{file}.json"),
+            "r",
+            encoding="utf-8",
+        ) as f:
             data = json.load(f)
             up = Uppers(data)
             up.run()
