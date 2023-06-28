@@ -1,0 +1,92 @@
+{
+    "mode": "WKL",
+    "ls": {
+        "long1": {
+            "d": 20,
+            "l": 13950,
+            "num": 2,
+            "h1": 600,
+            "h2": 600
+        }
+    },
+    "cs": {
+        "c1": {
+            "b": 500,
+            "edge": true,
+            "uppers": {}
+        },
+        "c2": {
+            "b": 500,
+            "edge": false,
+            "uppers": {
+                "upper1": {
+                    "d": 20,
+                    "position": 1,
+                    "num": 3
+                },
+                "upper2": {
+                    "d": 20,
+                    "position": 2,
+                    "num": 5
+                }
+            }
+        },
+        "c3": {
+            "b": 500,
+            "edge": true,
+            "uppers": {
+                "upper1": {
+                    "d": 20,
+                    "position": 1,
+                    "num": 1
+                },
+                "upper2": {
+                    "d": 18,
+                    "position": 2,
+                    "num": 2
+                }
+            }
+        }
+    },
+    "bs": {
+        "b1": {
+            "l": 5975,
+            "b": 300,
+            "h": 600,
+            "downs": {
+                "down1": {
+                    "d": 20,
+                    "num": 3
+                }
+            },
+            "hoop": {
+                "symbol": "8@100/200(2)"
+            },
+            "G": {},
+            "N": {},
+            "tensile": {}
+        },
+        "b2": {
+            "l": 7975,
+            "b": 300,
+            "h": 600,
+            "downs": {
+                "down1": {
+                    "d": 25,
+                    "num": 3
+                },
+                "down2": {
+                    "d": 22,
+                    "num": 2
+                }
+            },
+            "hoop": {
+                "symbol": "8@100(2)",
+                "addition": 6
+            },
+            "G": {},
+            "N": {},
+            "tensile": {}
+        }
+    }
+}

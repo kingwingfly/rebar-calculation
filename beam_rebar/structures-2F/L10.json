@@ -1,0 +1,160 @@
+{
+    "mode": "L",
+    "ls": {
+        "long1": {
+            "d": 25,
+            "l": 28200,
+            "num": 2
+        }
+    },
+    "cs": {
+        "c1": {
+            "b": 300,
+            "edge": true,
+            "uppers": {}
+        },
+        "c2": {
+            "b": 300,
+            "edge": false,
+            "uppers": {
+                "upper": {
+                    "d": 25,
+                    "num": 2,
+                    "position": 1
+                }
+            }
+        },
+        "c3": {
+            "b": 300,
+            "edge": false,
+            "uppers": {
+                "upper1":{
+                    "d": 22,
+                    "num": 2,
+                    "position": 1
+                }
+            }
+        },
+        "c4": {
+            "b": 300,
+            "edge": false,
+            "uppers": {
+                "upper1": {
+                    "d": 25,
+                    "num": 2,
+                    "position": 1
+                }
+            }
+        },
+        "c5": {
+            "b": 300,
+            "edge": true,
+            "uppers": {}
+        }
+    },
+    "bs": {
+        "b1": {
+            "l": 7100,
+            "b": 300,
+            "h": 550,
+            "downs": {
+                "down1": {
+                    "d": 25,
+                    "num": 2
+                },
+                "down2": {
+                    "d": 20,
+                    "num": 2
+                }
+            },
+            "hoop": {
+                "symbol": "8@200(2)",
+                "addition": 18
+            },
+            "G": {},
+            "N": {
+                "d": 12,
+                "num": 4
+            },
+            "tensile": {
+                "space": 400
+            }
+        },
+        "b2": {
+            "l": 7000,
+            "b": 300,
+            "h": 550,
+            "downs": {
+                "down1": {
+                    "d": 22,
+                    "num": 2
+                },
+                "down2": {
+                    "d": 20,
+                    "num": 1
+                }
+            },
+            "hoop": {
+                "symbol": "8@200(2)",
+                "addition": 18
+            },
+            "G": {},
+            "N": {
+                "d": 12,
+                "num": 4
+            },
+            "tensile": {
+                "space": 400
+            }
+        },
+        "b3": {
+            "l": 7000,
+            "b": 300,
+            "h": 550,
+            "downs": {
+                "down1": {
+                    "d": 22,
+                    "num": 2
+                },
+                "down2": {
+                    "d": 20,
+                    "num": 1
+                }
+            },
+            "hoop": {
+                "symbol": "8@200(2)",
+                "addition": 12
+            },
+            "G": {},
+            "N": {},
+            "tensile": {}
+        },
+        "b4": {
+            "l": 7100,
+            "b": 300,
+            "h": 550,
+            "downs": {
+                "down1": {
+                    "d": 25,
+                    "num": 2
+                },
+                "down2": {
+                    "d": 20,
+                    "num": 2
+                }
+            },
+            "hoop": {
+                "symbol": "8@200(2)",
+                "addition": 18
+            },
+            "G": {},
+            "N": {
+                "d": 12,
+                "num": 4
+            },
+            "tensile": {
+                "space": 400
+            }
+        }
+    }
+}
