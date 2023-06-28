@@ -29,7 +29,7 @@
             }
         },
         "c2": {
-            "b": 500,
+            "b": 550,
             "edge": false,
             "uppers": {
                 "upper1": {
@@ -45,7 +45,7 @@
             }
         },
         "c3": {
-            "b": 500,
+            "b": 550,
             "edge": false,
             "uppers": {
                 "upper1": {
@@ -61,7 +61,7 @@
             }
         },
         "c4": {
-            "b": 500,
+            "b": 550,
             "edge": false,
             "uppers": {
                 "upper1": {
