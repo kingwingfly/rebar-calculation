@@ -1,6 +1,6 @@
 import json
 from pprint import pprint
-from beam import (
+from .beam import (
     LongRebar,
     UpperRebar,
     DownRebar,
@@ -16,7 +16,7 @@ from beam import (
 import os
 
 
-class Sys:
+class Beams:
     def __init__(self, data) -> None:
         try:
             match data["mode"]:
@@ -28,6 +28,7 @@ class Sys:
                     switch_mode(Mode.L)
         except:
             raise IndexError("mode needed")
+        self.num = data.get("num", 1)
         self.cs = [Column(attri["b"], attri["edge"]) for attri in data["cs"].values()]
         self.bs = [
             Beam(attri["l"], self.cs[i], self.cs[i + 1], attri["b"], attri["h"])
@@ -95,7 +96,7 @@ class Sys:
         from itertools import chain
 
         ret = ""
-        ret += f"种类\t直径\t数量\t单长\t总长\n"
+        # ret += f"种类\t直径\t数量\t单长\t总长\n"
 
         total_dic = {}
         for ty, beams in zip(
@@ -111,16 +112,16 @@ class Sys:
             ],
         ):
             for beam in beams:
-                ret += f"{ty}筋\t{beam.d}\t{beam.num}\t{beam.each_length:.0f}\t{beam.total_length:.0f}\n"
-                total_dic[f"{beam.d}"] = (
-                    total_dic.get(f"{beam.d}", 0) + beam.total_length
+                # ret += f"{ty}筋\t{beam.d}\t{beam.num}\t{beam.each_length:.0f}\t{beam.total_length:.0f}\n"
+                total_dic[beam.d] = (
+                    total_dic.get(beam.d, 0) + beam.total_length * self.num
                 )
         ret += f"\n直径\t总长度(m)\n"
         total_dic = dict(sorted(list(total_dic.items()), key=lambda x: -int(x[0])))
         for d, l in total_dic.items():
             ret += f"{d}\t{l/1000:.3f}\n"
-        print(ret)
-        return ret
+        # print(ret)
+        return total_dic
 
 
 if __name__ == "__main__":
@@ -129,11 +130,11 @@ if __name__ == "__main__":
         it = os.walk(os.path.join(os.path.dirname(__file__), struct))
         for dirpath, dirnames, filenames in it:
             for file in filenames:
-                print(file)
                 with open(os.path.join(dirpath, file), "r", encoding="utf-8") as f:
                     data = json.load(f)
-                s = Sys(data)
-                ret = s.run()
+                bs = Beams(data)
+                ret = bs.run()
+                print(ret, end=",")
                 # with open(
                 #     os.path.join(
                 #         os.path.dirname(__file__),

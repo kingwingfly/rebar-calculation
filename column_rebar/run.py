@@ -1,10 +1,10 @@
-from column import HoopRebar, LongRebar, Column
+from .column import HoopRebar, LongRebar, Column
 import json
 from pprint import pprint
 import os
 
 
-class Sys:
+class Columns:
     def __init__(self, data) -> None:
         self.cs = [
             Column(attri["a"], attri["b"], attri["d"], attri["hs"], attri["hls"])
@@ -30,6 +30,7 @@ class Sys:
         for d, l in ret.items():
             t += f"{d}\t{l/1000:.3f}\n"
         print(t)
+        return ret
 
 
 if __name__ == "__main__":
@@ -39,5 +40,6 @@ if __name__ == "__main__":
         encoding="utf-8",
     ) as f:
         data = json.load(f)
-        s = Sys(data)
-        s.run()
+        s = Columns(data)
+        ret = s.run()
+        pprint(ret)

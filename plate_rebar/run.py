@@ -1,11 +1,12 @@
 import json
 from pprint import pprint
-from plate import UpperRebar, BottomRebar, Beam
+from .plate import UpperRebar, BottomRebar, Beam, Plate
 import os
 
 
-class Uppers:
+class Plates:
     def __init__(self, data) -> None:
+        self.plates = [Plate(s) for s in data.get("plates", [])]
         self.uppers = [
             UpperRebar(attri["symbol"], b=Beam(attri["b"], true_l=attri["true_l"]))
             for attri in data.get("uppers", [])
@@ -25,6 +26,8 @@ class Uppers:
 
     def run(self):
         ret = {}
+        for p in self.plates:
+            ret[8] = ret.get(8, 0) + p.total_length
         for upper in self.uppers:
             ret[upper.d] = ret.get(upper.d, 0) + upper.total_length
         for bottom in self.bottoms:
@@ -33,7 +36,7 @@ class Uppers:
         for d, l in ret.items():
             t += f"{d}\t{l/1000:.3f}\n"
         print(t)
-        return t
+        return ret
 
 
 if __name__ == "__main__":
@@ -45,5 +48,6 @@ if __name__ == "__main__":
             encoding="utf-8",
         ) as f:
             data = json.load(f)
-            up = Uppers(data)
-            up.run()
+            up = Plates(data)
+            ret = up.run()
+            pprint(ret)

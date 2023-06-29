@@ -5,6 +5,19 @@ WAN = 15
 C = 25
 
 
+class Plate:
+    def __init__(self, s: str) -> None:
+        self.a, self.b, self.l, self.r, self.t, self.d, self.n = tuple(map(int, s.split()))
+
+    @property
+    def total_length(self):
+        l1 = self.a - self.l - self.r + 300
+        l2 = self.b - self.t - self.d + 300
+        n1 = (self.b - self.t - self.d) // 200
+        n2 = (self.a - self.l - self.r) // 200
+        return (l1 * n1 + l2 * n2) * self.n
+
+
 class Beam:
     def __init__(self, b: int, true_l: int = None, edge: bool = False) -> None:
         self.b = b
@@ -72,7 +85,10 @@ class UpperRebar:
 
     @property
     def total_length(self):
-        return self.num * self.each_length
+        n1 = (self.l1 - self.space / 2) / self.space + 1 if self.l1 else 0
+        n2 = (self.l2 - self.space / 2) / self.space + 1 if self.l2 else 0
+        fengbu1 = (n1 + n2) * self.b.true_l
+        return self.num * self.each_length + fengbu1
 
 
 def test_bottom():
