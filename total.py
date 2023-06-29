@@ -124,16 +124,56 @@ if __name__ == "__main__":
                     "细节(m)",
                 ],
                 [
-                    columns_l,
-                    beams_l,
-                    plates_l,
-                    others_l,
-                    total_l,
-                    columns_m,
-                    beams_m,
-                    plates_m,
-                    others_m,
-                    total_m,
+                    dict(
+                        sorted(
+                            [(k, v) for k, v in columns_l.items()], key=lambda x: -x[0]
+                        )
+                    ),
+                    dict(
+                        sorted(
+                            [(k, v) for k, v in beams_l.items()], key=lambda x: -x[0]
+                        )
+                    ),
+                    dict(
+                        sorted(
+                            [(k, v) for k, v in plates_l.items()], key=lambda x: -x[0]
+                        )
+                    ),
+                    dict(
+                        sorted(
+                            [(k, v) for k, v in others_l.items()], key=lambda x: -x[0]
+                        )
+                    ),
+                    dict(
+                        sorted(
+                            [(k, v) for k, v in total_l.items()], key=lambda x: -x[0]
+                        )
+                    ),
+                    dict(
+                        sorted(
+                            [(k, v) for k, v in columns_m.items()], key=lambda x: -x[0]
+                        )
+                    ),
+                    dict(
+                        sorted(
+                            [(k, v) for k, v in beams_m.items()], key=lambda x: -x[0]
+                        )
+                    ),
+                    dict(
+                        sorted(
+                            [(k, v) for k, v in plates_m.items()], key=lambda x: -x[0]
+                        )
+                    ),
+                    dict(
+                        sorted(
+                            [(k, v) for k, v in others_m.items()], key=lambda x: -x[0]
+                        )
+                    ),
+                    dict(
+                        sorted(
+                            [(k, v) for k, v in total_m.items()], key=lambda x: -x[0]
+                        )
+                    ),
                     details_l,
                 ],
             )
