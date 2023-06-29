@@ -27,7 +27,6 @@ class Sys:
         for h in self.hoops:
             ret[h.d] = ret.get(h.d, 0) + h.total_length
         t = "\n类型\t长度(m)\n"
-        pprint(ret)
         for d, l in ret.items():
             t += f"{d}\t{l/1000:.3f}\n"
         print(t)
