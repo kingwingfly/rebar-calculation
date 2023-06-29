@@ -1,6 +1,6 @@
 import json
 from pprint import pprint
-from rebar import (
+from beam import (
     LongRebar,
     UpperRebar,
     DownRebar,

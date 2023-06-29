@@ -29,7 +29,7 @@ class Uppers:
             ret[upper.d] = ret.get(upper.d, 0) + upper.total_length
         for bottom in self.bottoms:
             ret[bottom.d] = ret.get(bottom.d, 0) + bottom.total_length
-        t = "直径\t总长度\n"
+        t = "直径\t总长度(m)\n"
         for d, l in ret.items():
             t += f"{d}\t{l/1000:.3f}\n"
         print(t)

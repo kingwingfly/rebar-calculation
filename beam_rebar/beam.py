@@ -245,7 +245,7 @@ class HoopBar:
             assert stirrup_d, f"{self.arm_num}肢箍需要知道角筋直径(stirrup_d)"
             assert inner_d, f"{self.arm_num}肢箍需要知道小箍筋所在纵筋直径(inner_d)"
             self.stirrup_d = stirrup_d
-            self.d_inner = inner_d
+            self.inner_d = inner_d
 
     @property
     def num(self):
@@ -278,7 +278,7 @@ class HoopBar:
                 + (self.beam.b - 2 * C - self.d) * 2
                 + (
                     (self.beam.b - 2 * C - 2 * self.d - self.stirrup_d) / 3
-                    + self.d_inner
+                    + self.inner_d
                     + self.d
                 )
                 * 2
