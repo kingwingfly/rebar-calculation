@@ -1,17 +1,18 @@
 import re
 
-C = 25
+C = 20
 MAO = 37
 WAN = 15
 
 
 class Column:
-    def __init__(self, a: int, b: int, d: int, hs: list[int], hls: list[int]) -> None:
+    def __init__(self, a: int, b: int, d: int, hs: list[int], hls: list[int], num: int) -> None:
         self.a = a
         self.b = b
         self.d = d
         self.hs = hs
         self.hls = hls
+        self.num = num
         assert len(self.hls) - len(self.hs) == 1, "不合理数量的柱梁搭配"
 
     @property

@@ -7,7 +7,7 @@ import os
 class Columns:
     def __init__(self, data) -> None:
         self.cs = [
-            Column(attri["a"], attri["b"], attri["d"], attri["hs"], attri["hls"])
+            Column(attri["a"], attri["b"], attri["d"], attri["hs"], attri["hls"], attri.get("num", 1))
             for attri in data["columns"].values()
         ]
         self.longs = [
@@ -23,13 +23,13 @@ class Columns:
     def run(self):
         ret = {}
         for l in self.longs:
-            ret[l.d] = ret.get(l.d, 0) + l.total_length
+            ret[l.d] = ret.get(l.d, 0) + l.total_length * l.c.num
         for h in self.hoops:
-            ret[h.d] = ret.get(h.d, 0) + h.total_length
+            ret[h.d] = ret.get(h.d, 0) + h.total_length * h.c.num
         t = "\n类型\t长度(m)\n"
         for d, l in ret.items():
             t += f"{d}\t{l/1000:.3f}\n"
-        print(t)
+        # print(t)
         return ret
 
 

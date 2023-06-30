@@ -2,7 +2,7 @@ import re
 
 MAO = 37
 WAN = 15
-C = 25
+C = 20
 
 
 class Plate:
