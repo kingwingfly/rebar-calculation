@@ -23,19 +23,19 @@ column_datas = [
     )
 ]
 others_l = {
-    20: 224544,
-    14: 35781.6,
-    12: 4588,
-    8: 146880
+    20: 224544,  # AL纵筋
+    14: 35781.6,  # TZ1纵筋
+    12: 4588,  # 吊筋
+    8: 146880  # 1F板上部贯通筋
     + 146880
     + 182160
-    + 257040
+    + 257040  # 2F板上部贯通筋
     + 212520
     + 18360
     + 18760
-    + 60667.6
-    + 1213844
-    + 119651,
+    + 60667.6  # TZ1箍筋
+    + 1213844  # 檐口通长+分布筋
+    + 119651,  # AL箍筋
 }
 
 density = {
@@ -50,6 +50,9 @@ density = {
     22: 2.98,
     25: 3.85,
     28: 4.83,
+    "箍筋8": 0.395,
+    "箍筋10": 0.617,
+    "箍筋12": 0.888,
 }
 
 others_m = dict(
@@ -105,13 +108,13 @@ if __name__ == "__main__":
                     details_l["梁"] = details_l.get("梁", {}) | {
                         dirpath.split("-")[-1] + " " + file.split(".")[0]: ret
                     }
-    for d, l in total_l.items():
-        total_m[d] = l * density[d]
     for i in [columns_l, beams_l, plates_l, others_l, total_l]:
         for k in i.keys():
             i[k] = round(i[k] / 1000, 3)
         pprint(i)
-    for i in [columns_m, beams_m, plates_m, others_m, total_m]:
+    for d, l in total_l.items():
+        total_m[d] = round(l * density[d], 3)
+    for i in [columns_m, beams_m, plates_m, total_m]:
         for k in i.keys():
             i[k] = round(i[k] / 1000, 3)
         pprint(i)
@@ -139,23 +142,23 @@ if __name__ == "__main__":
                     "细节(m)",
                 ],
                 chain(
-                    map(
-                        lambda d: dict(
-                            sorted([(k, v) for k, v in d.items()], key=lambda x: -x[0])
-                        ),
-                        [
-                            columns_l,
-                            beams_l,
-                            plates_l,
-                            others_l,
-                            total_l,
-                            columns_m,
-                            beams_m,
-                            plates_m,
-                            others_m,
-                            total_m,
-                        ],
-                    ),
+                    # map(
+                    #     lambda d: dict(
+                    #         sorted([(k, v) for k, v in d.items()], key=lambda x: -x[0])
+                    #     ),
+                    [
+                        columns_l,
+                        beams_l,
+                        plates_l,
+                        others_l,
+                        total_l,
+                        columns_m,
+                        beams_m,
+                        plates_m,
+                        others_m,
+                        total_m,
+                    ],
+                    # ),
                     [details_l],
                 ),
             )

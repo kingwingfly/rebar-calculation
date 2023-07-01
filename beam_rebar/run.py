@@ -107,7 +107,6 @@ class Beams:
                 self.downs,
                 self.gs,
                 self.ns,
-                self.hoops,
                 self.tensiles,
             ],
         ):
@@ -116,8 +115,12 @@ class Beams:
                 total_dic[beam.d] = (
                     total_dic.get(beam.d, 0) + beam.total_length * self.num
                 )
+        for hoop in self.hoops:
+            total_dic["箍筋" + str(hoop.d)] = (
+                total_dic.get("箍筋" + str(hoop.d), 0) + hoop.total_length * self.num
+            )
         ret += f"\n直径\t总长度(m)\n"
-        total_dic = dict(sorted(list(total_dic.items()), key=lambda x: -int(x[0])))
+        # total_dic = dict(sorted(list(total_dic.items()), key=lambda x: -int(x[0])))
         for d, l in total_dic.items():
             ret += f"{d}\t{l/1000:.3f}\n"
         # print(ret)
@@ -134,7 +137,7 @@ if __name__ == "__main__":
                     data = json.load(f)
                 bs = Beams(data)
                 ret = bs.run()
-                print(ret, end=",")
+                # print(ret, end=",")
                 # with open(
                 #     os.path.join(
                 #         os.path.dirname(__file__),
