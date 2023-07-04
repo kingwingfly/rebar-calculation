@@ -377,13 +377,14 @@ def test_hoop():
     s = "8@100(4)"
     hoopbar = HoopBar(b, s, stirrup_d=25, inner_d=25, addition=12)
     exp_l = (
-        (650 - 50 - 8) * 4
-        + (350 - 50 - 8) * 2
-        + ((350 - 50 - 16 - 25) / 3 + 25 + 8) * 2
+        (650 - 2 * C - 8) * 4
+        + (350 - 2 * C - 8) * 2
+        + ((350 - 2 * C - 16 - 25) / 3 + 25 + 8) * 2
         + 11.9 * 8 * 4
     )
     exp_num = int((8000 - 500 - 100) / 100) + 1 + 12
     exp = exp_l * exp_num
+
     assert hoopbar.num == exp_num
     assert hoopbar.each_length == exp_l
     assert hoopbar.total_length == exp
@@ -392,7 +393,7 @@ def test_hoop():
     b = Beam(6000, c1, c2, b=300, h=500)
     s = "10@100/150(2)"
     hoopbar = HoopBar(b, s, addition=6)
-    exp_l = (500 - 50 - 10) * 2 + (300 - 50 - 10) * 2 + 11.9 * 10 * 2
+    exp_l = (500 - 2 * C - 10) * 2 + (300 - 2 * C - 10) * 2 + 11.9 * 10 * 2
     exp_num = (
         int((750 - 50) / 100)
         + 1
@@ -413,7 +414,7 @@ def test_tensile():
     c2 = Column(500, edge=True)
     b = Beam(8000, c1, c2, b=350)
     t = Tensile(b, 200, 2)
-    exp_l = 350 - 50 - 6 + 2 * 1.9 * 6 + 2 * 75
+    exp_l = 350 - 2 * C - 6 + 2 * 1.9 * 6 + 2 * 75
     exp_n = (int((8000 - 500 - 100) / 200) + 1) * 2
     exp = exp_l * exp_n
     assert t.total_length == exp

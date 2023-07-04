@@ -3,11 +3,14 @@ import re
 MAO = 37
 WAN = 15
 C = 20
+H = 100
 
 
 class Plate:
     def __init__(self, s: str) -> None:
-        self.a, self.b, self.l, self.r, self.t, self.d, self.n = tuple(map(int, s.split()))
+        self.a, self.b, self.l, self.r, self.t, self.d, self.n = tuple(
+            map(int, s.split())
+        )
 
     @property
     def total_length(self):
@@ -73,9 +76,10 @@ class UpperRebar:
         ret = 0
         ret += self.l1 + self.l2
         if self.l1 and self.l2:
-            ret += self.b.b
+            ret += self.b.b + 2 * (H - C)
         else:
             la = MAO * self.d
+            ret += H - C
             ret += la if la <= self.b.b - C else 0.6 * la + WAN * self.d
         return ret
 

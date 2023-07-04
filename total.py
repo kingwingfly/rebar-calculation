@@ -22,8 +22,25 @@ column_datas = [
         os.path.dirname(__file__), "column_rebar", "structures", f"structures.json"
     )
 ]
+
+base_l = {
+    32: 710160,
+    28: 541900,
+    25: 174362,
+    22: 135836,
+    18: 97208,
+    16: 133516,
+    14: 981088,
+    12: 2504793,
+    "箍筋12": 332674,
+    "箍筋10": 834084,
+    8: 2010305,
+    "箍筋8": 1672862,
+}
+
+
 others_l = {
-    25: 245412, # 梁上柱纵筋
+    25: 245412,  # 梁上柱纵筋
     20: 224544,  # AL纵筋
     14: 35781.6,  # TZ1纵筋
     12: 4588,  # 吊筋
@@ -37,11 +54,9 @@ others_l = {
     + 60667.6  # TZ1箍筋
     + 1213844  # 檐口通长+分布筋
     + 119651  # AL箍筋
-    + 374976,   # 梁上柱箍筋
-    6: 2848300 # 1F填充墙拉筋
-    + 2848300   # 2F填充墙拉筋
-    + 3301200   # 3F填充墙拉筋
-} 
+    + 374976,  # 梁上柱箍筋
+    6: 2848300 + 2848300 + 3301200,  # 1F填充墙拉筋  # 2F填充墙拉筋  # 3F填充墙拉筋
+}
 
 density = {
     6: 0.222,
@@ -55,10 +70,14 @@ density = {
     22: 2.98,
     25: 3.85,
     28: 4.83,
+    30: 5.55,
+    32: 6.31,
     "箍筋8": 0.395,
     "箍筋10": 0.617,
     "箍筋12": 0.888,
 }
+
+base_m = dict([(d, round(l / 1000 * density[d] / 1000, 3)) for d, l in base_l.items()])
 
 others_m = dict(
     [(d, round(l / 1000 * density[d] / 1000, 3)) for d, l in others_l.items()]
@@ -113,10 +132,12 @@ if __name__ == "__main__":
                     details_l["梁"] = details_l.get("梁", {}) | {
                         dirpath.split("-")[-1] + " " + file.split(".")[0]: ret
                     }
-    for i in [columns_l, beams_l, plates_l, others_l, total_l]:
+    for i in [columns_l, beams_l, plates_l, others_l, base_l, total_l]:
         for k in i.keys():
             i[k] = round(i[k] / 1000, 3)
         pprint(i)
+    for d, l in chain(others_l.items(), base_l.items()):
+        total_l[d] = total_l.get(d, 0) + l
     for d, l in total_l.items():
         total_m[d] = round(l * density[d], 3)
     for i in [columns_m, beams_m, plates_m, total_m]:
@@ -137,11 +158,13 @@ if __name__ == "__main__":
                     "柱钢筋合计长度(m)",
                     "梁钢筋合计长度(m)",
                     "板钢筋合计长度(m)",
+                    "基础钢筋合计长度(m)",
                     "其他手算部分合计长度(m)",
                     "全部钢筋合计长度(m)",
                     "柱钢筋合计质量(t)",
                     "梁钢筋合计质量(t)",
                     "板钢筋合计质量(t)",
+                    "基础钢筋合计质量(t)",
                     "其他手算部分合计质量(t)",
                     "全部钢筋合计质量(t)",
                     "细节(m)",
@@ -156,10 +179,12 @@ if __name__ == "__main__":
                         beams_l,
                         plates_l,
                         others_l,
+                        base_l,
                         total_l,
                         columns_m,
                         beams_m,
                         plates_m,
+                        base_m,
                         others_m,
                         total_m,
                     ],
