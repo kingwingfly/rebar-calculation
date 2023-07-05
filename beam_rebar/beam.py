@@ -321,26 +321,63 @@ class Tensile:
 
 
 def test_long():
+    # KL1
     c1 = Column(550)
     c2 = Column(550)
-    lr = LongRebar(3, 22, 14000, c1, c2, 2)
-    exp = (14000 + 550 - C * 2 + WAN * 22 * 2) * 2
+    lr = LongRebar(2, 25, 13950, c1, c2, 2)
+    exp = (13950 + 550 - C * 2 + WAN * 25 * 2) * 2
     assert lr.total_length == exp
+    nr = LongRebar(2, 12, 13950, c1, c2, 4)
+    exp = (13950 - 550 + MAO * 12 * 2) * 4
+    assert nr.total_length == exp
+    # L12
+    switch_mode(Mode.L)
+    c1 = Column(300)
+    c2 = Column(300)
+    lr = LongRebar(2, 20, 11000 + 100, c1, c2, 2)
+    exp = (11100 + 300 - C * 2 + WAN * 20 * 2) * 2
+    assert lr.total_length == exp
+    # WKL5
+    switch_mode(Mode.WKL)
+    c1 = Column(500)
+    c2 = Column(500)
+    lr = LongRebar(2, 22, 28000, c1, c2, 2, h1=600, h2=600)
+    exp = (28000 + 500 - C * 2 + 600 - C + 600 - C) * 2
+    assert lr.total_length == exp
+    switch_mode(Mode.KL)
 
 
 def test_upper():
-    c1 = Column(500)
+    # KL1
+    c1 = Column(550)
     c2 = Column(500)
-    c3 = Column(500)
-    b1 = Beam(6000, c1, c2)
-    ur = UpperRebar(3, 22, None, b1, c1, 1, 2)
-    exp = ((6000 - 500) / 3 + 500 - C + WAN * 22) * 2
-    assert ur.total_length == exp
-    c3 = Column(500)
-    b2 = Beam(8000, c2, c3)
+    c3 = Column(550)
+    b2 = Beam(7975, c2, c3)
+    ur = UpperRebar(3, 22, None, b2, c3, 1, 1)
+    exp = ((7975 - 525) / 3 + 550 - C + WAN * 22) * 1
+    assert abs(ur.total_length - exp) < 0.01
+    b1 = Beam(5975, c1, c2)
     ur = UpperRebar(3, 22, b1, b2, c2, 2, 3)
-    exp = ((8000 - 500) / 4 * 2 + 500) * 3
+    exp = ((7975 - 525) / 4 * 2 + 500) * 3
     assert ur.total_length == exp
+    # L12
+    switch_mode(Mode.L)
+    c1 = Column(300)
+    c2 = Column(300)
+    c3 = Column(300)
+    b1 = Beam(4000, c1, c2, h=500)
+    b2 = Beam(7100, c2, c3, h=600)
+    ur = UpperRebar(3, 20, None, b1, c1, 1, 1)
+    exp = (4000 - 300) / 3 + 300 - C + WAN * 20
+    assert ur.total_length == exp
+    ur = UpperRebar(3, 20, b1, b2, c2, 1, 1)
+    exp = (7100 - 300) / 3 * 2 + 300
+    assert ur.total_length == exp
+    # WKL5
+    switch_mode(Mode.WKL)
+    ur = UpperRebar(3, 20, b1, b2, c2, 1, 1)
+    ...
+    switch_mode(Mode.KL)
 
 
 def test_down():

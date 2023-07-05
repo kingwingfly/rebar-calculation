@@ -6,7 +6,9 @@ WAN = 15
 
 
 class Column:
-    def __init__(self, a: int, b: int, d: int, hs: list[int], hls: list[int], num: int) -> None:
+    def __init__(
+        self, a: int, b: int, d: int, hs: list[int], hls: list[int], num: int
+    ) -> None:
         self.a = a
         self.b = b
         self.d = d
@@ -40,18 +42,8 @@ class HoopRebar:
         return (
             (self.c.a - 2 * C - self.d) * 4
             + (self.c.b - 2 * C - self.d) * 4
-            + (
-                (self.c.a - 2 * C - 2 * self.d - self.ld) / 3
-                + self.ld
-                + self.d
-            )
-            * 2
-            + (
-                (self.c.b - 2 * C - 2 * self.d - self.ld) / 3
-                + self.ld
-                + self.d
-            )
-            * 2
+            + ((self.c.a - 2 * C - 2 * self.d - self.ld) / 3 + self.ld + self.d) * 2
+            + ((self.c.b - 2 * C - 2 * self.d - self.ld) / 3 + self.ld + self.d) * 2
             + 1.9 * self.d * 6
             + max(10 * self.d, 75) * 6
         )
@@ -131,16 +123,34 @@ class LongRebar:
 
 
 def test_hoop():
-    c = Column(550, 550, 25, [750, 4200, 4200, 4200], [1250, 0, 600, 600, 900])
+    # KZ1
+    c = Column(550, 550, 25, [750, 4200, 4200, 4200], [1250, 0, 600, 600, 900], 4)
     h = HoopRebar(c, "8@100/200")
+    print(h.num)
+    print(h.each_length)
+    print(h.total_length)
+    # KZ3
+    c = Column(550, 550, 25, [750, 4200, 4200, 4200], [1250, 0, 600, 600, 900], 3)
+    h = HoopRebar(c, "100@100/200")
     print(h.num)
     print(h.each_length)
     print(h.total_length)
 
 
 def test_long():
-    c = Column(550, 550, 25, [750, 4200, 4200, 4200], [1250, 0, 600, 600, 900])
-    l = LongRebar(c, 7, "out")
+    # KZ1
+    c = Column(550, 550, 25, [750, 4200, 4200, 4200], [1250, 0, 600, 600, 900], 6)
+    l = LongRebar(c, 8, "out")
+    print(l.num)
+    print(l.each_length)
+    print(l.total_length)
+    l = LongRebar(c, 6, "inner")
+    print(l.num)
+    print(l.each_length)
+    print(l.total_length)
+    # KZ3
+    c = Column(550, 550, 25, [750, 4200, 4200, 4200], [1250, 0, 600, 600, 900], 3)
+    l = LongRebar(c, 16, "inner")
     print(l.num)
     print(l.each_length)
     print(l.total_length)

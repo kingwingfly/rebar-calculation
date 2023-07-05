@@ -14,6 +14,7 @@ class Plate:
 
     @property
     def total_length(self):
+        # 负筋分布筋
         l1 = self.a - self.l - self.r + 300
         l2 = self.b - self.t - self.d + 300
         n1 = (self.b - self.t - self.d) // 200
@@ -89,6 +90,7 @@ class UpperRebar:
 
     @property
     def total_length(self):
+        # 负筋下的分布筋
         n1 = (self.l1 - self.space / 2) / self.space + 1 if self.l1 else 0
         n2 = (self.l2 - self.space / 2) / self.space + 1 if self.l2 else 0
         fengbu1 = (n1 + n2) * self.b.true_l
@@ -98,7 +100,7 @@ class UpperRebar:
 def test_bottom():
     b1 = Beam(300)
     b2 = Beam(300)
-    br = BottomRebar("8@200", b1, b2, 3000)
+    br = BottomRebar("8@200", b1, b2, 3000, 3000)
     print(br.each_length)
     print(br.num)
     print(br.total_length)
